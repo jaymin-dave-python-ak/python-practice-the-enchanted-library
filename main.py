@@ -1,16 +1,11 @@
-def main():
-    print('''
-| THE ENCHANTED LIBRARY       |
-+=============================+
-| 1) Add Book                 | 
-| 2) Add Book with Meta Data  | 
-| 3) Add User                 |
-| 4) View All Books           |   
-| 5) Borrow Book              |
-| 6) Return Book              |
-| 7) Remove Book              |   
-| 8) Remove User              |
-''')
-    
+from designPatterns.factory import UserFactory, BookFactory, UserRole, BookType
+
 if __name__ == "__main__":
-    main()
+    user_factory = UserFactory()
+    book_factory = BookFactory()
+
+    user1 = user_factory.create_user("U001", "Jaymin Dave", UserRole.SCHOLAR)
+    book1 = book_factory.create_book("B001", "The Art of War", "Kishan Mehta", BookType.RARE_BOOK)
+
+    print(user1.name)
+    print(book1.title)
