@@ -1,4 +1,4 @@
-from models.book import *
+from models.book import AncientScript, RareBook, GeneralBook, BookType
 
 class BookFactory:
     @staticmethod
