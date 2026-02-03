@@ -1,48 +1,15 @@
 from abc import ABC, abstractmethod
-from enum import Enum
-
-class BookType(Enum):
-    ANCIENT_SCRIPT = 1
-    RARE_BOOK = 2
-    GENERAL_BOOK = 3
+from utils.constants import BookType
 
 class Book(ABC):
     def __init__(self, book_id, title, author, book_type, access_level):
-        self.__book_id = book_id
-        self.__title = title
-        self.__author = author
-        self.__book_type = book_type
-        self.__access_level = access_level
-        self.__status = "AVAILABLE"
-        
-    @property
-    def book_id(self):
-        return self.__book_id
-
-    @property
-    def title(self):
-        return self.__title
-
-    @property
-    def author(self):
-        return self.__author
-
-    @property
-    def book_type(self):
-        return self.__book_type
-
-    @property
-    def access_level(self):
-        return self.__access_level
-
-    @property
-    def status(self):
-        return self.__status
-
-    @status.setter
-    def status(self, status):
-        self.__status = status
-
+        self.book_id = book_id
+        self.title = title
+        self.author = author
+        self.book_type = book_type
+        self.access_level = access_level
+        self.status = "AVAILABLE"
+    
     @abstractmethod
     def lending_policy(self):
         pass
@@ -67,4 +34,3 @@ class GeneralBook(Book):
 
     def lending_policy(self):
         return "SHORT_TERM"
-

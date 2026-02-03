@@ -1,28 +1,11 @@
 from abc import ABC, abstractmethod
-from enum import Enum
-
-class UserRole(Enum):
-    LIBRARIAN = 1
-    SCHOLAR = 2
-    GUEST = 3
+from utils.constants import UserRole
 
 class User(ABC):
     def __init__(self, user_id, name, role):
-        self.__user_id = user_id
-        self.__name = name
-        self.__role = role
-
-    @property
-    def user_id(self):
-        return self.__user_id
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def role(self):
-        return self.__role
+        self.user_id = user_id
+        self.name = name
+        self.role = role
 
     @abstractmethod
     def can_borrow(self, book):
