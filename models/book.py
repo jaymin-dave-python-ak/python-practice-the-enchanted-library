@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from utils.constants import BookType, BookStatus, BookAccessLevel, BookLendingPolicy
+from patterns.book_state import AvailableState
 
 class Book(ABC):
     def __init__(self, book_id, title, author, book_type, access_level):
@@ -8,8 +9,8 @@ class Book(ABC):
         self.author = author
         self.book_type = book_type
         self.access_level = access_level
-        self.status = BookStatus.AVAILABLE
-        # Metadata fields for Builder to populate
+        self.status = BookStatus.AVAILABLE 
+        self._state_logic = AvailableState() 
         self.preservation_notes = "Standard"
         self.digital_access = False
         self.special_restrictions = []
@@ -17,6 +18,18 @@ class Book(ABC):
     def __str__(self):
         return f"Book ID: {self.book_id}\n Book Title: {self.title}\n Book Author: {self.author}"
     
+    def set_state(self, state):
+        self._state_logic = state
+
+    def borrow_book(self):
+        self._state_logic.borrow_book(self)
+
+    def return_book(self):
+        self._state_logic.return_book(self)
+
+    def request_restoration(self):
+        self._state_logic.request_restoration(self)
+        
     @abstractmethod
     def lending_policy(self):
         pass
