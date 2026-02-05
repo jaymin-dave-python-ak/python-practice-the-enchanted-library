@@ -15,4 +15,3 @@ if __name__ == "__main__":
     custom_book = (builder.set_preservation("Keep in vacuum-sealed glass").enable_digital_access(False).add_restriction("Librarian oversight required").build())
     print(user1)
     print(book1)
-    

@@ -28,3 +28,5 @@ class CentralCatalog:
             if b.status == BookStatus.AVAILABLE: 
                 available_list.append(b)  
         return available_list
+    
+    
