@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
-from utils.constants import BookType, BookStatus, BookAccessLevel, BookLendingPolicy
+from abc import ABC
+from utils.constants import BookType, BookStatus, BookAccessLevel
 from patterns.book_state import AvailableState
 
 class Book(ABC):
@@ -14,10 +14,7 @@ class Book(ABC):
         self.preservation_notes = "Standard"
         self.digital_access = False
         self.special_restrictions = []
-    
-    def __str__(self):
-        return f"Book ID: {self.book_id}\n Book Title: {self.title}\n Book Author: {self.author}"
-    
+      
     def set_state(self, state):
         self._state_logic = state
 
@@ -27,21 +24,11 @@ class Book(ABC):
     def return_book(self):
         self._state_logic.return_book(self)
 
-    def request_restoration(self):
-        self._state_logic.request_restoration(self)
-        
-    @abstractmethod
-    def lending_policy(self):
-        pass
-
 class AncientScript(Book):
     def __init__(self, book_id, title, author):
         super().__init__(book_id, title, author, 
                          BookType.ANCIENT_SCRIPT, 
                          BookAccessLevel.RESTRICTED)
-
-    def lending_policy(self):
-        return BookLendingPolicy.RESTRICTED_ACCESS
 
 class RareBook(Book):
     def __init__(self, book_id, title, author):
@@ -49,14 +36,8 @@ class RareBook(Book):
                          BookType.RARE_BOOK, 
                          BookAccessLevel.SCHOLAR_ONLY)
 
-    def lending_policy(self):
-        return BookLendingPolicy.SHORT_TERM
-
 class GeneralBook(Book):
     def __init__(self, book_id, title, author):
         super().__init__(book_id, title, author, 
                          BookType.GENERAL_BOOK, 
                          BookAccessLevel.GENERAL)
-
-    def lending_policy(self):
-        return BookLendingPolicy.LONG_TERM
