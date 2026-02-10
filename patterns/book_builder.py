@@ -1,5 +1,4 @@
 from models.book import AncientScript, RareBook, GeneralBook
-from utils.constants import BookType
 
 class BookBuilder:
     def __init__(self, book_id, title, author, book_type):
@@ -25,9 +24,9 @@ class BookBuilder:
         return self
 
     def build(self):
-        if self.book_type == BookType.ANCIENT_SCRIPT:
+        if self.book_type == "ANCIENT_SCRIPT":
             book = AncientScript(self.book_id, self.title, self.author)
-        elif self.book_type == BookType.RARE_BOOK:
+        elif self.book_type == "RARE_BOOK":
             book = RareBook(self.book_id, self.title, self.author)
         else:
             book = GeneralBook(self.book_id, self.title, self.author)

@@ -1,5 +1,4 @@
 from abc import ABC
-from utils.constants import BookType, BookStatus, BookAccessLevel
 from patterns.book_state import AvailableState
 
 class Book(ABC):
@@ -9,8 +8,8 @@ class Book(ABC):
         self.author = author
         self.book_type = book_type
         self.access_level = access_level
-        self.status = BookStatus.AVAILABLE 
-        self._state_logic = AvailableState() 
+        self.status = "AVAILABLE"
+        self._state_logic = AvailableState()
         self.preservation_notes = "Standard"
         self.digital_access = False
         self.special_restrictions = []
@@ -26,18 +25,12 @@ class Book(ABC):
 
 class AncientScript(Book):
     def __init__(self, book_id, title, author):
-        super().__init__(book_id, title, author, 
-                         BookType.ANCIENT_SCRIPT, 
-                         BookAccessLevel.RESTRICTED)
+        super().__init__(book_id, title, author, "ANCIENT_SCRIPT", "RESTRICTED")
 
 class RareBook(Book):
     def __init__(self, book_id, title, author):
-        super().__init__(book_id, title, author, 
-                         BookType.RARE_BOOK, 
-                         BookAccessLevel.SCHOLAR_ONLY)
+        super().__init__(book_id, title, author, "RARE_BOOK", "SCHOLAR_ONLY")
 
 class GeneralBook(Book):
     def __init__(self, book_id, title, author):
-        super().__init__(book_id, title, author, 
-                         BookType.GENERAL_BOOK, 
-                         BookAccessLevel.GENERAL)
+        super().__init__(book_id, title, author, "GENERAL_BOOK", "GENERAL")

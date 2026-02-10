@@ -1,13 +1,18 @@
-from utils.constants import BookStatus
+from pymongo import MongoClient
 
 class CentralCatalog:
     _instance = None  
+    
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(CentralCatalog, cls).__new__(cls)
-            cls._instance.books = {} 
-            cls._instance.users = {}
-            print("--- Central Catalog System Initialized ---")
+            cls._instance.client = MongoClient("mongodb+srv://jaymin:jaymin@jaymin-dave-ak-cluster.x4jz7ed.mongodb.net/?appName=Jaymin-Dave-AK-Cluster")
+            cls._instance.db = cls._instance.client['library_db']
+            
+            cls._instance.books_col = cls._instance.db['books']
+            cls._instance.users_col = cls._instance.db['users']
+            
+            print("--- Central Catalog Linked to MongoDB ---")
         return cls._instance
 
     def add_book(self, book):
@@ -29,7 +34,7 @@ class CentralCatalog:
     def list_available_books(self):
         available_list = []  
         for b in self.books.values():  
-            if b.status == BookStatus.AVAILABLE: 
+            if b.status == "AVAILABLE": 
                 available_list.append(b)  
         return available_list
 

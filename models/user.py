@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from utils.constants import UserRole, BookAccessLevel
 
 class User(ABC):
     def __init__(self, user_id, password, name, role):
@@ -17,26 +16,23 @@ class User(ABC):
 
 class Librarian(User):
     def __init__(self, user_id, password, name):
-        super().__init__(user_id, password, name, 
-                         UserRole.LIBRARIAN)
+        super().__init__(user_id, password, name, "LIBRARIAN")
 
     def can_borrow(self, book):
         return True
 
 class Scholar(User):
     def __init__(self, user_id, password, name):
-        super().__init__(user_id, password, name, 
-                         UserRole.SCHOLAR)
+        super().__init__(user_id, password, name, "SCHOLAR")
 
     def can_borrow(self, book):
         # Can borrow RareBooks and GeneralBooks, but NOT AncientScripts
-        return book.access_level != BookAccessLevel.RESTRICTED
+        return book.access_level != "RESTRICTED"
 
 class Guest(User):
     def __init__(self, user_id, password, name):
-        super().__init__(user_id, password, name, 
-                         UserRole.GUEST)
+        super().__init__(user_id, password, name, "GUEST")
 
     def can_borrow(self, book):
         # Can borrow ONLY GeneralBooks
-        return book.access_level == BookAccessLevel.GENERAL
+        return book.access_level == "GENERAL"

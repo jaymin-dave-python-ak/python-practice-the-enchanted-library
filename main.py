@@ -3,7 +3,6 @@ from patterns.facade import LibraryManagementFacade
 from patterns.factory.user_factory import UserFactory
 from patterns.factory.book_factory import BookFactory  
 from patterns.book_builder import BookBuilder
-from utils.constants import UserRole, BookType
 
 def main():
     library = LibraryManagementFacade()
@@ -25,8 +24,8 @@ def main():
             uid = input("User ID: "); name = input("Name: "); pwd = input("Password: ")
             print("1. Librarian, 2. Scholar, 3. Guest")
             role_choice = input("Select Role: ")
-            roles = {"1": UserRole.LIBRARIAN, "2": UserRole.SCHOLAR, "3": UserRole.GUEST}
-            user = UserFactory.create_user(uid, pwd, name, roles.get(role_choice, UserRole.GUEST))
+            roles = {"1": "LIBRARIAN", "2": "SCHOLAR", "3": "GUEST"}
+            user = UserFactory.create_user(uid, pwd, name, roles.get(role_choice, "GUEST"))
             print(library.register_user(user))
 
         elif choice == "2":
@@ -40,8 +39,8 @@ def main():
             author = input("Author: ")
             print("1. Ancient, 2. Rare, 3. General")
             t_choice = input("Type: ")
-            types = {"1": BookType.ANCIENT_SCRIPT, "2": BookType.RARE_BOOK, "3": BookType.GENERAL_BOOK}
-            b_type = types.get(t_choice, BookType.GENERAL_BOOK)
+            types = {"1": "ANCIENT_SCRIPT", "2": "RARE_BOOK", "3": "GENERAL_BOOK"}
+            b_type = types.get(t_choice, "GENERAL_BOOK")
 
             if sub_choice == "a":
                 book_obj = BookFactory.create_book(bid, title, author, b_type)

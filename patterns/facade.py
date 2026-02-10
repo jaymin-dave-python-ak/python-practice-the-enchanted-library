@@ -1,6 +1,5 @@
 from patterns.catalog_singleton import CentralCatalog
 
-
 class LibraryManagementFacade:
     def __init__(self):
         self.catalog = CentralCatalog()

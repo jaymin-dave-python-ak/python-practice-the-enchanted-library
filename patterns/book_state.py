@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from utils.constants import BookStatus
 
 class BookState(ABC):
     @abstractmethod
@@ -13,7 +12,7 @@ class BookState(ABC):
 class AvailableState(BookState):
     def borrow_book(self, book):
         print(f"Success: '{book.title}' has been borrowed.")
-        book.status = BookStatus.BORROWED
+        book.status = "BORROWED"
         book.set_state(BorrowedState()) 
 
     def return_book(self, book):
@@ -25,5 +24,5 @@ class BorrowedState(BookState):
 
     def return_book(self, book):
         print(f"Success: '{book.title}' returned.")
-        book.status = BookStatus.AVAILABLE
+        book.status = "AVAILABLE"
         book.set_state(AvailableState())
