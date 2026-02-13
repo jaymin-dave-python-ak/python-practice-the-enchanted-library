@@ -26,7 +26,8 @@ def main():
             role_choice = input("Select Role: ")
             roles = {"1": "LIBRARIAN", "2": "SCHOLAR", "3": "GUEST"}
             user = UserFactory.create_user(uid, pwd, name, roles.get(role_choice, "GUEST"))
-            print(library.register_user(user))
+            print(user)
+            library.register_user(user)
 
         elif choice == "2":
             print("\n--- Book Registration ---")
@@ -55,8 +56,8 @@ def main():
                 if rest: builder.add_restriction(rest)
                 
                 book_obj = builder.build()
-            
-            print(library.register_new_book(book_obj))
+            print(book_obj)
+            library.register_new_book(book_obj)
 
         elif choice == "3":
             print(library.borrow_book(input("User ID: "), input("Password: "), input("Book ID: ")))

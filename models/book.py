@@ -13,7 +13,10 @@ class Book(ABC):
         self.preservation_notes = "Standard"
         self.digital_access = False
         self.special_restrictions = []
-      
+    
+    def __str__(self):
+        return f"Book ID: {self.book_id} \nTitle: {self.title} \n"
+    
     def set_state(self, state):
         self._state_logic = state
 

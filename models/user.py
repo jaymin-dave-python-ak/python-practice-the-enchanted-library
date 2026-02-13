@@ -8,7 +8,7 @@ class User(ABC):
         self.role = role
         
     def __str__(self):
-        return f"User ID: {self.user_id}\n Name: {self.name}\n"
+        return f"User ID: {self.user_id} \nName: {self.name} \n"
     
     @abstractmethod
     def can_borrow(self, book):
